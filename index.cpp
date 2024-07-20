@@ -1,27 +1,27 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-namespace one{
-    int a = 1;
-}
-
-namespace two{
-    int a = 2;
-}
-
 /* 
-Provides a solution for preventing name conflicts in large projects. 
-Each entity needs a unique name. 
-A namespace allows for identically named entities as long as the namespaces are different. 
-Normally assigning two different values to a same variable is not allowed, but it is by defining them in two different namespaces.
+typedef = 
+reserved keyword used to create an addtional name (alias),
+for another data type. Helps with readability and reduces typos.
+Give a new identifier to current datatype.
+Use when there is a clear benefit
+for defining the name of identifier must end with _t
 */
 
+typedef std::vector<std::pair<std::string, int>> pairlist_t;
+// typedef std::string text;
+typedef double db;
+// Replaced with 'using' (work better w/ templates)
+using text = std::string;
+using num = int; 
 int main()
 {
-//   using namespace two;
-  using namespace one;
-//   int a = 3;  
-//   cout<<two::a;
-  cout<<a;
+  text code = "typedef used to declare custom data types. ";
+  db pi = 3.1416;
+  num age = 20;
+  cout<<pi<<" and "<<code<<age;
   return 0;
 };
