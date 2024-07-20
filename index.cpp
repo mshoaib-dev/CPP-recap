@@ -4,14 +4,23 @@ using namespace std;
 int main()
 {
 /* 
-  type conversion  = conversion a value of one data type to another
-  Implicit = automatic i.e., truncating decimal value to whole no. using int data type.
-  Explicit = Precede value with new data type (int, string, char)
+cin >> Extraction Operator
+cout << Insetion Operator
+To accept input with white spaces or sequence of text use getline() fun.
+input buffer automatically add next line if cin is called before getline()
+
 */
-  char letter = 84;
-  int runs = 280;
-  int overs= 50;
-  double runRate = (double) runs/overs; 
-  cout<<letter<<"he run rate = "<< runRate; 
+  string brand, gen;   
+  int demand;
+  cout<<"Name of company: ";
+  cin>>brand;
+  cout<<"Name of Laptop Generation";
+  getline(cin, gen);
+  cin>>gen;
+  getline(cin >> ws,gen); // ws: whitespace to get avoid
+  cout<<"How much you ask?";
+  cin>>demand;
+
+  cout<<"You've asked: "<<demand<<" for " <<brand<<"having generation of: "<< gen; 
   return 0;
 };
