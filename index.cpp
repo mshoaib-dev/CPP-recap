@@ -1,60 +1,35 @@
 #include <iostream>
-#include <string>
+// #include <ctime> // use for randorm no. generation
 using namespace std;
  
 /*  
-WHILE LOOP: It is much like IF statement, except we can repeat the code potentially infinite amount of time, as long as the condition remains true. 
-Great use: Can force the user to do something in order to continue with rest of the code. 
-
-DO WHILE: do some block of code first, THEN repeat again if condition is true
-
-Given conditions used mostly with loops:
-BREAK: break out of a loop, used in switch-cases too, and in loops
-CONTINUE: skip current iteration
-
-NESTED LOOP: loop inside another loop, both loops must have different iterating variable
+PSEUDO RANDOM NO. = NOT truly random, but close
+need to INTIALIZE random no. generator
+perfect for no's like roll of dice, ranged no, flexibilty to get no's in desired range. 
+take modulus with that no. within which want to decide the rang
+Suitable to generate fake no's for certain game
 */
-
-string name;
-double temp;
 
 int main()
 {
-  //while-loop
-  cout<<"Enter your name: "<<endl;
-  getline(cin, name);
-  while (name.empty())
-  {
-    cout<<"Enter your name:"<<endl;
-    getline(cin, name);
-  }
-  cout<<"Salaam, "<<name<<endl;
+  srand(time(NULL)); // randomNo. generator
   
-  //do-while
-  do{
-    cout<<"Enter temperature for boiling point of water: "<<endl;
-    cin>>temp; 
-  } while (temp != 100);
-  cout<<"Great!";
-  
-  // continue, break conditions
-  for (int i = 0; i < 6; i++)
+  for (int i = 0; i < 10; i++)
   {
-    if(i == 3) continue;
-    if(i == 3) break;
-    cout<<i<<endl;
-  }
-  
-  // nested-loop
-
-  for (int i = 0; i < 3; i++)
-  {
-    for (int j = 0; j < 4; j++)
-    {
-      cout<<"*";
-    }
-    cout<<endl;
+    // int num = (rand() % 25) + 1; // +1 for postive no. & exact = outer range. 
+    int num = (rand() % 6) + 1;
+    // cout<<num<<" ";
   }
 
+  // random-event
+  int event = (rand() % 3) + 1;
+
+  switch (event)
+  {
+  case 1: cout<<"You won Gold Medal"; break;
+  case 2: cout<<"You won Silver Medal"; break;
+  case 3: cout<<"You won Bronze Medal"; break;
+  }
+  
   return 0;
 };
