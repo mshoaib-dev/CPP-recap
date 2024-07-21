@@ -31,5 +31,20 @@ int main()
   case 3: cout<<"You won Bronze Medal"; break;
   }
   
+  // no-guessing game
+  
+  int no = (rand() % 3) + 1, guess, attempts = 0;
+
+  do
+  {
+    cout<<"Enter your guess b/w (1-50): "<<endl;
+    cin>>guess;
+    attempts++;
+    if (guess < no) cout<<"Too Low!\n";
+    else if (guess > no) cout<<"Too High! \n";
+    else cout<<"Great! # of attempts: "<<attempts<<endl;
+    
+  } while (guess != no);
+  
   return 0;
 };
