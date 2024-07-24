@@ -1,102 +1,86 @@
 #include <iostream>
-#include <iomanip>
+#include <ctime>
 using namespace std;
- 
-/*  
-FUNCTION = reusable block of code
-it's declared outside but mostly before main function and invoked inside main function
-to daclare after main function, need to call the function before main funtion alongwith return type when function
-is declared after main function, but still there is call inside main function. Return: it returns the execution result of function. For returning a value, make sure to declare the return type of function i.e., void, int, double, string,....
 
-OVERLOADED FUNCTIONS: different versions of the same function, it's declaration before main function is must
-Method overloading can be possible on the following basis:
-1. The return type of the overloaded function.
-2. The type of the parameters passed to the function.
-3. The number of parameters passed to the function.
-
-FUNCTION SIGNATURE: function name + parameters, that needs to be unique like id
-*/
-
-
-//functions declaration
-void showBalance(double balance);
-double deposit();
-double withdraw(double balance);
-
+char userChoice();
+char computerChoice();
+void showChoice(char choice);
+void chooseWinner(char player, char computer);
 int main()
 {
-double balance = 700;
-int choice;
+  char player, computer;
 
-do
-{
-      cout<<"*************************************\n";
-      cout<<"******* BANK ACCOUNT INFO *********\n";
-      cout<<"Choose one of the options: \n";
-      cout<<"1. Balance Inquiry \n";
-      cout<<"2. Deposit \n";
-      cout<<"3. Withdraw \n";
-      cout<<"4. Exit \n";
-      cin>>choice;
+  player = userChoice();
+  cout<<"You choose: \n";
+  showChoice(player);
+  computer = computerChoice();
+  cout<<"Computer choose: \n";
+  showChoice(computer);
 
-      cin.clear(); // it will reset the error flag, when the standard input fails to interpret the input. 
-      fflush(stdin); // it'll clear the input buffer
-
-      switch(choice){
-        case 1: showBalance(balance);
-                break;
-        case 2: balance += deposit();
-                showBalance(balance);
-                break;
-        case 3: balance -= withdraw(balance);
-                showBalance(balance);
-                break;
-        case 4: cout<<"Thanks for your visit!\n";
-                break;
-        default:cout<<"Try (1-4)\n"; break;
-      }
-
-  }while (choice !=4);
-
+  chooseWinner(player, computer);
   return 0;
 };
 
-//functions defintions-signature
-void showBalance(double balance){
-  cout<< "Current balance = Rs:" << setprecision(2)<<fixed<<balance<<"\n"; 
-}
+char userChoice(){
+  char choice;
 
-double deposit(){
-  double amount = 0; 
-  cout<<"Enter amount to deposit: \n";
-  cin>>amount;
-
-  if (amount > 0)
+  cout<<"********** Rock - Paper - Scissor Game  ********* \n";
+  do
   {
-  cout<<"Successfuly deposited and, \n";
-  return amount;
+    cout<<"Choose one of the given:  \n";
+    cout<<"************************ \n";
+    cout<<"'r' for Rock \n";
+    cout<<"'p' for Paper \n";
+    cout<<"'s' for Scissor \n";
+    cin>>choice;
+  } while (choice != 'r' && choice != 'p' && choice != 's');
+  
+  return choice;
+};
+char computerChoice(){
+  srand(time(NULL));
+
+  int num = (rand() % 3) + 1;
+
+  switch (num)
+  {
+  case 1: return 'r';
+  case 2: return 'p';
+  case 3: return 's';
+  default: break;
   }
-  else
-  {
-  cout<<"Invalid amount!\n";
   return 0;
+};
+void showChoice(char choice){
+  switch (choice)
+  {
+  case 'r': cout<<">> Rock \n"; 
+            break;
+  case 'p': cout<<">> Paper \n"; 
+            break;
+  case 's': cout<<">> Scissor \n"; 
+            break;
+  default: cout<<"Invalid choice";
+    break;
   }
 };
+void chooseWinner(char player, char computer){
 
-double withdraw(double balance){
-  double amount = 0;
-  cout<<"Enter amount to withdraw: \n";
-  cin>>amount;
-
-  if (amount > balance)
+  switch (player)
   {
-    cout<<"Insufficient balance! \n";
-    return 0;
+  case 'r': if (computer  == 'r') cout<<"It's tie! \n";
+            else if (computer  == 'p') cout<<"You lost!\n";
+            else cout<<"You won! \n";
+            break;
+  case 'p': if (computer  == 'r') cout<<"You won! \n";
+            else if (computer  == 'p') cout<<"It's tie!\n";
+            else cout<<"You lost! \n";
+            break;
+  case 's': if (computer  == 'r') cout<<"You lost! \n";
+            else if (computer  == 'p') cout<<"You won!\n";
+            else cout<<"It's tie\n";
+            break;
+  default:
+    break;
   }
-  else if (amount < 0)
-  {
-    cout<<"Invalid amount! \n";
-    return 0;
-  }
-  else {return amount;}
 };
