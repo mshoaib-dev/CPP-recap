@@ -27,6 +27,7 @@ int searchArray(string array[], int size, string uni){
       return i;
     }
   }
+  
   return -1;
 };
 
