@@ -1,35 +1,32 @@
 #include <iostream>
 using namespace std;
 
-/*
-ARRAY: A data structure that can hold multiple values, values are accessed by an index number, like a variable that can hold multiple values. It can only contain values of the same data type.
-It’s static data strucute, there is to declare the size of array is we have to define an array or assigning the values later in the code. 
+// SEARCH A INDEX IN AN ARRAY
 
-PASSING AN ARRAY TO A FUNCTION:
-passing an array to a function in given case, there is use of pointer
-the given function points to the address where the array begins not that array itself, 
-passing an array to a function only require array name not the brackets 
-when a function receives an array, it decays to an pointer, function no longer knows what's the size of an array, we could pass the size to iterate the elements of an array
-*/
-
-double getTotal(double charges[], int size);
+int searchArray(string array[], int size, string uni);
 int main()
 {
-  double charges[] = {434.45, 534.45, 53.76, 90.5989, 984};
-  int size = _countof(charges);
-  double total = getTotal(charges, size);
-  cout<<"$"<<total<<"\n";
+  // top engineering universities in Pakistan
+  string provinces[] = {"GIKI", "PIASS", "NUST", "LUMS", "PU"}, uni;
+  int size = _countof(provinces), rank;
   
+  cout<<"Enter the name of university to search for latest rank: \n";
+  getline(cin, uni);
+  rank = searchArray(provinces, size, uni);
+
+  if (rank != -1) cout<<"You entered univerisity rank is: "<<rank<<endl;
+  else cout<<"Entered univerity NOT in lasest rank! \n";
+
   return 0;
 };
 
-double getTotal(double charges[], int size){
-  
-  double total = 0;
-  for (int i = 0; i < size; i++)
-  {
-    total += charges[i];
+int searchArray(string array[], int size, string uni){
+
+  for (int i = 0; i < size; i++){
+    if (array[i] == uni) {
+      return i;
+    }
   }
-  
-  return total;
+  return -1;
 };
+
