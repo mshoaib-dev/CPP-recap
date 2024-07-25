@@ -39,6 +39,7 @@ int main()
   {
     cout<<board[i]<<endl;
   }
+  
   // using foreach loop
   for(string board: board)
   {
