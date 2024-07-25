@@ -10,7 +10,6 @@ passing an array to a function in given case, there is use of pointer
 the given function points to the address where the array begins not that array itself, 
 passing an array to a function only require array name not the brackets 
 when a function receives an array, it decays to an pointer, function no longer knows what's the size of an array, we could pass the size to iterate the elements of an array
-
 */
 
 double getTotal(double charges[], int size);
