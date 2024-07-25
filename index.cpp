@@ -19,6 +19,7 @@ int main()
   int size = _countof(charges);
   double total = getTotal(charges, size);
   cout<<"$"<<total<<"\n";
+  
   return 0;
 };
 
