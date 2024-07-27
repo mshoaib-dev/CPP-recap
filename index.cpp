@@ -19,7 +19,6 @@ int main()
   return 0;
 };
 
-
 void sortArray(char letter[], int size){
   char temp; 
 
