@@ -1,33 +1,40 @@
 #include <iostream>
 using namespace std;
 
-// SEARCH A INDEX IN AN ARRAY
+// SORT AN ARRAY: Bubble Sort Algorithm
+// It's easy to write but NOT as efficient as others algorithms....
 
-int searchArray(string array[], int size, string uni);
+void sortArray(char letter[], int size);
 int main()
 {
-  // top engineering universities in Pakistan
-  string provinces[] = {"GIKI", "PIASS", "NUST", "LUMS", "PU"}, uni;
-  int size = _countof(provinces), rank;
+  int array[] = {9,10,5,3,8,1,0,6,2,7,4};
+  char letter[] = {'E', 'A', 'C', 'B', 'D'}; // sorting ASCII codes
+  int size = sizeof(letter)/sizeof(letter[0]);
+  sortArray(letter, size);
+  for (int element: letter)
+  { 
+    cout<<element<<" ";
+  }
   
-  cout<<"Enter the name of university to search for latest rank: \n";
-  getline(cin, uni);
-  rank = searchArray(provinces, size, uni);
-
-  if (rank != -1) cout<<"You entered univerisity rank is: "<<rank<<endl;
-  else cout<<"Entered univerity NOT in lasest rank! \n";
-
   return 0;
 };
 
-int searchArray(string array[], int size, string uni){
 
-  for (int i = 0; i < size; i++){
-    if (array[i] == uni) {
-      return i;
+void sortArray(char letter[], int size){
+  char temp; 
+
+  for (int i = 0; i < size -1; i++) // this loop to iterate over each element in an letter, size-1: don't need to swap the last element 
+  {
+    for (int j = 0; j < size - i - 1; j++) // this loop to swap the elements in an letter over a fixed iteration, size - i - 1: to swap rest once, or don't need to sort element that are already sorted 
+    {
+      if (letter[j] > letter[j+1])  // > for asc & < for dec
+      {
+        temp = letter[j];
+        letter[j] = letter[j+1];
+        letter[j+1] = temp;
+      }
     }
   }
-  
-  return -1;
 };
+
 
