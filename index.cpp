@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// SORT AN ARRAY: Bubble Sort Algorithm
+// SORT AN ARRAY: Bubble Sort Algorithm, it is LINEAR SEARCH TECHNICALLY
 // It's easy to write but NOT as efficient as others algorithms....
 
 void sortArray(char letter[], int size);
@@ -35,5 +35,3 @@ void sortArray(char letter[], int size){
     }
   }
 };
-
-
