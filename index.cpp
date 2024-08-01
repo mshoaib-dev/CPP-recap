@@ -1,37 +1,29 @@
 #include <iostream>
 using namespace std;
 
-// SORT AN ARRAY: Bubble Sort Algorithm, it is LINEAR SEARCH TECHNICALLY
-// It's easy to write but NOT as efficient as others algorithms....
+// fill(): Fills a range of elements with a specified value, 
+// fill(begin, end, value), mostly deals with arrays
+// most use case: filling an array with same entereries manually with large indexes
+// can manipulate for custom range and values
+// there would be blank spaces for not defined range
 
-void sortArray(char letter[], int size);
 int main()
 {
-  int array[] = {9,10,5,3,8,1,0,6,2,7,4};
-  char letter[] = {'E', 'A', 'C', 'B', 'D'}; // sorting ASCII codes
-  int size = sizeof(letter)/sizeof(letter[0]);
-  sortArray(letter, size);
-  for (int element: letter)
-  { 
-    cout<<element<<" ";
-  }
-  
+  // int nums[10]={1,1,1,1,1,1,1,1,1,1};
+  int nums[2];
+  fill(nums, nums+2, 90);
+
+  int size = 8;
+  int frac = 8; // 4 for quarter
+  string places[size];
+
+  fill(places, places + (size/frac), "Skardu");
+  fill(places + (size/frac), places + (size/frac) * 2, "Swat");
+  fill(places + (size/frac) * 2, places + (size/frac) * 3, "Nanga Parbat");
+  fill(places + (size/frac) * 3, places + size, "Kashmir");
+
+  for(string place:places){
+    cout<<place<<endl;
+  } 
   return 0;
-};
-
-void sortArray(char letter[], int size){
-  char temp; 
-
-  for (int i = 0; i < size -1; i++) // this loop to iterate over each element in an letter, size-1: don't need to swap the last element 
-  {
-    for (int j = 0; j < size - i - 1; j++) // this loop to swap the elements in an letter over a fixed iteration, size - i - 1: to swap rest once, or don't need to sort element that are already sorted 
-    {
-      if (letter[j] > letter[j+1])  // > for asc & < for dec
-      {
-        temp = letter[j];
-        letter[j] = letter[j+1];
-        letter[j+1] = temp;
-      }
-    }
-  }
 };
