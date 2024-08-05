@@ -17,56 +17,56 @@ there are given ways:
 */
 
 int getDigit(const int number);
-int evenDigitSum(const string cardNum);
-int oddDigitSum(const string cardNum);
+int evenDigitSum(const int cardArray[]);
+int oddDigitSum(const int cardArray[]);
+int m = 0;
 
 int main()
 {
+  // string cardNum = "4556 737586899855";
   string cardNum;
   cout<<"Enter the Card no: ";
-  cin>>cardNum;
-  // cout<<"You entered: "<<cardNum;
+  getline(cin, cardNum);
 
-  int result = 0;
-  result = oddDigitSum(cardNum) + evenDigitSum(cardNum);
+  //string to array:
+  int strSize = sizeof(cardNum);
+  int cardArray[strSize];
   
-  if (result % 10 == 0)
+  for (int i = 0; i < strSize; i++)
   {
-    cout<<cardNum<<" is VALID!";
+    if (isdigit(cardNum[i]))
+    {
+      cardArray[m] = cardNum[i] - '0'; // convert from char to integer value: - '0' or 48 the decimal code
+      m++;
+    }
   }
-  else
-  {
-    cout<<cardNum<<" is NOT VALID!";
-  }
+  
+  //display array elements
+  for (int j = 0; j < m; j++) // cout<<cardArray[j]<<" ";
+    
+  int result = 0;
+  result = oddDigitSum(cardArray) + evenDigitSum(cardArray);
+
+  if (result % 10 == 0) cout<<cardNum<<" is VALID!";
+  else  cout<<cardNum<<" is NOT VALID!";
   
   return 0;
 };
 
 int getDigit(const int number){
-
-  return number % 10 + (number / 10 % 10); // if doubled digit is 2 figure it'll splite and add the results, ow not
+  return number % 10 + (number / 10 % 10);// if doubled digit is 2 figure it'll splite and add the results, ow not
 };
 
-int evenDigitSum(const string cardNum){
+int evenDigitSum(const int cardArray[]){
   
   int sum = 0;
-  
-  for (int i = cardNum.size() - 2; i >=0; i-=2)
-  {
-    sum += getDigit((cardNum[i] - 48) * 2); // convert from char to integer value: - '0' or 48 the decimal code 
-  }
-  
+  for (int i = m - 2; i >=0; i-=2) sum += getDigit(cardArray[i] * 2); 
   return sum;
 };
 
-int oddDigitSum(const string cardNum){
+int oddDigitSum(const int cardArray[]){
 
   int sum = 0;
-  
-  for (int i = cardNum.size() - 1; i >=0; i-=2)
-  {
-    sum += cardNum[i] - '0';
-  }
-  
+  for (int i = m - 1; i >=0; i-=2)  sum += cardArray[i];
   return sum;
 };
