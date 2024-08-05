@@ -58,6 +58,7 @@ int evenDigitSum(const string cardNum){
   
   return sum;
 };
+
 int oddDigitSum(const string cardNum){
 
   int sum = 0;
