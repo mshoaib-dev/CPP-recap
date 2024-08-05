@@ -42,7 +42,10 @@ int main()
   }
   
   //display array elements
-  for (int j = 0; j < m; j++) // cout<<cardArray[j]<<" ";
+  for (int j = 0; j < m; j++) 
+  {
+    // cout<<cardArray[j]<<" ";
+  }
     
   int result = 0;
   result = oddDigitSum(cardArray) + evenDigitSum(cardArray);
