@@ -1,34 +1,43 @@
 #include <iostream>
 using namespace std;
-#define r 3
+#define r 2
 #define c 3
 
-// rows and columns elements addition, transport of a matrix implemented here
 int main()
 {
-  int arr[r][c] = {{2,1,1},{2,5,2},{3,3,9}};
-  int rowSum = 0, colSum= 0;
+  int no[r][c] = {
+    {4,5,3},
+    {4,5,3}
+  };
 
-// row sum  
+int sum = 0;
+  // row sum
+  cout<<"Rows sum:    ";
+
   for (int i = 0; i < r; i++)
   {
     for (int j = 0; j < c; j++)
     {
-      rowSum +=arr[i][j]; // each row fixed for all columns
+      sum+=no[i][j];
     }
-    cout<<rowSum<<" ";
-    rowSum = 0;
-  }  
-    cout<<'\n';
-// column sum
-  for (int i = 0; i < r; i++)
+    cout<<sum<<" ";
+    sum=0;
+  }
+  cout<<'\n';
+
+  //column sum
+  cout<<"Columns sum: ";
+
+  for (int j = 0; j < c; j++)
   {
-    for (int j = 0; j < c; j++)
+    for (int i = 0; i < r; i++)
     {
-      colSum +=arr[j][i]; // each column fixed for all rows
+      sum+=no[i][j];
     }
-    cout<<colSum<<" ";
-    colSum = 0;
-  }  
+    cout<<sum<<" ";
+    sum = 0;
+  }
+  
+
   return 0;
 };
