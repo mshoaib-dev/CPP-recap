@@ -1,26 +1,30 @@
 #include <iostream>
 using namespace std;
 
-// program to find the repeated digits
-
 int main()
 {
-  int n;
-  cout<<"Enter no: ";
-  cin>>n;
-  int seen[10] = {0};
-  int rem;
-
-  while (n>0)
-  {  
-    rem = n%10;
-    if (seen[rem] == 1) break;
-    seen[rem] = 1;
-    n = n/10;
+  int arr[3][3] = {
+    {2,1,1},
+    {2,5,2},
+    {3,3,9}
+  };
+  int rowSum = 0, colSum1 = 0, colSum2 = 0, colSum3 = 0;
+  
+  for (int i = 0, m=0; i < 3; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      rowSum +=arr[i][j];
+    }
+    cout<<rowSum<<" ";
+    rowSum = 0;
+    colSum1 += arr[i][0];
+    colSum2 += arr[i][1];
+    colSum3 += arr[i][2];
   }
-
-  if (n>0) cout<<"Yes";
-  else cout<<"NO";
+  cout<<endl<<colSum1<<" ";
+  cout<<colSum2<<" ";
+  cout<<colSum3<<" ";
   
   return 0;
 };
