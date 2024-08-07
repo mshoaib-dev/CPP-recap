@@ -1,26 +1,55 @@
 #include <iostream>
 using namespace std;
 
-//max and min using pointers of an array
+//finding median of an sorted array by Bubble Sort Algorithm
 
-void minMax(int arr[], int len, int *max, int *min){  // declaring pointers
-  *max = *min = arr[0]; //updating value of variable point by pointers by dereferencing them
-  for (int i = 0; i < len; i++)
+//sorting an array
+void sortArray(int arr[], int len)
+{
+  int temp = 0;
+
+  for (int i = 0; i < len -1; i++)
   {
-    if (arr[i] > *max)  *max = arr[i];    
-    if (arr[i] < *min)  *min = arr[i];
+    for (int j = 0; j < len - 1 - i; j++)
+    {
+      if (arr[j] > arr[j+1]) // Ascending order
+      {
+        temp = arr[j];
+        arr[j] = arr[j+1];
+        arr[j+1] = temp;
+      }
+    }
   }
-  
+};
+
+//finidng median of sorted array
+void median(int arr[], int len, double *pMed){
+  if (len % 2 == 0) *pMed = (double) (arr[len/2] + arr[len/2 - 1]) / 2; //even length
+  else *pMed = arr[(len -1)/2]; // odd length
 };
 
 int main()
 {
-  int arr[] = {84,53,4,423,0,2024,-2};
+  cout<<"\n***********************************\n";
+  cout<<"MEDIAN OF AN SORTED ARRAY\n";
+  cout<<"***********************************\n";
+  
+  int arr[] = {84,53,4,423,0,2024, -1};
   int len = sizeof(arr)/sizeof(arr[0]);
   int max, min;
-  
-  minMax(arr, len, &max, &min); //passing the address of variable
-  cout<<"Max: "<<max<<"\nMin: "<<min;
+  double med;
 
+  sortArray(arr, len);
+  
+  //printing sorted array
+  cout<<"Sorted array in ASC order:  "<<'\n';
+  for (int i = 0; i < len; i++)
+  {
+    cout<<arr[i]<<" ";  
+  }
+
+  median(arr, len, &med);
+  cout<<"\n\nMedia = "<<med;
+  cout<<"\n***********************************\n";
   return 0;
 };
