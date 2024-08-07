@@ -1,20 +1,26 @@
 #include <iostream>
 using namespace std;
 
+//max and min using pointers of an array
+
+void minMax(int arr[], int len, int *max, int *min){  // declaring pointers
+  *max = *min = arr[0]; //updating value of variable point by pointers by dereferencing them
+  for (int i = 0; i < len; i++)
+  {
+    if (arr[i] > *max)  *max = arr[i];    
+    if (arr[i] < *min)  *min = arr[i];
+  }
+  
+};
+
 int main()
 {
   int arr[] = {84,53,4,423,0,2024,-2};
-  int size = sizeof(arr)/sizeof(arr[0]);
+  int len = sizeof(arr)/sizeof(arr[0]);
   int max, min;
-
-  for (int i = 0; i < size; i++)
-  {
-    if (arr[i] > arr[i+1])  max = arr[i];
-    else if (arr[i]<arr[i+1]) min = arr[i];
-  }
-
-  cout<<"Max: "<<max<<'\n';  
-  cout<<"Min: "<<min<<'\n';  
+  
+  minMax(arr, len, &max, &min); //passing the address of variable
+  cout<<"Max: "<<max<<"\nMin: "<<min;
 
   return 0;
 };
