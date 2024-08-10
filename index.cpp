@@ -49,7 +49,7 @@ int main()
   }
 
   median(arr, len, &med);
-  cout<<"\n\nMedia = "<<med;
+  cout<<"\n\nMedian = "<<med;
   cout<<"\n***********************************\n";
   return 0;
 };
