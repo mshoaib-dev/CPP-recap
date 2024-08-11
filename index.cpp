@@ -1,55 +1,126 @@
 #include <iostream>
+#include <ctime>
 using namespace std;
 
-//finding median of an sorted array by Bubble Sort Algorithm
+// TIC-TAC-TOE Game
 
-//sorting an array
-void sortArray(int arr[], int len)
-{
-  int temp = 0;
-
-  for (int i = 0; i < len -1; i++)
-  {
-    for (int j = 0; j < len - 1 - i; j++)
-    {
-      if (arr[j] > arr[j+1]) // Ascending order
-      {
-        temp = arr[j];
-        arr[j] = arr[j+1];
-        arr[j+1] = temp;
-      }
-    }
-  }
-};
-
-//finidng median of sorted array
-void median(int arr[], int len, double *pMed){
-  if (len % 2 == 0) *pMed = (double) (arr[len/2] + arr[len/2 - 1]) / 2; //even length
-  else *pMed = arr[(len -1)/2]; // odd length
-};
+void drawBoard(char *spaces);
+void playerMove(char *spaces, char player);
+void computerMove(char *spaces, char computer);
+bool checkWinner(char *spaces, char player, char computer);
+bool checkTie(char *spaces);
+int playNum = 0;
 
 int main()
 {
-  cout<<"\n***********************************\n";
-  cout<<"MEDIAN OF AN SORTED ARRAY\n";
-  cout<<"***********************************\n";
-  
-  int arr[] = {84,53,4,423,0,2024, -1};
-  int len = sizeof(arr)/sizeof(arr[0]);
-  int max, min;
-  double med;
+  char spaces[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+  char player = 'X';
+  char computer = 'O';
+  bool running = true; 
+  drawBoard(spaces);
 
-  sortArray(arr, len);
+  while (running)
+  {   
+    playerMove(spaces, player);
+    drawBoard(spaces);
+    if (checkWinner(spaces, player, computer))
+    {
+      running = false;
+      break;
+    }
+    else if(checkTie(spaces))
+    {  
+      running = false;
+      break;
+    }
   
-  //printing sorted array
-  cout<<"Sorted array in ASC order:  "<<'\n';
-  for (int i = 0; i < len; i++)
-  {
-    cout<<arr[i]<<" ";  
+    computerMove(spaces, computer);
+    drawBoard(spaces);
+    if (checkWinner(spaces, player, computer))
+    {
+      running = false;
+      break;
+    }
+    else if(checkTie(spaces))
+    {  
+      running = false;
+      break;
+    }
   }
-
-  median(arr, len, &med);
-  cout<<"\n\nMedia = "<<med;
-  cout<<"\n***********************************\n";
+  cout<<"Thanks for playing!";
   return 0;
 };
+
+void drawBoard(char *spaces){
+  cout<<'\n';
+  cout<<"     |     |     \n";
+  cout<<"  "<<spaces[0]<<"  |  "<<spaces[1]<<"  |  "<<spaces[2]<<"  \n";
+  cout<<"_____|_____|_____\n";
+  cout<<"     |     |     \n";
+  cout<<"  "<<spaces[3]<<"  |  "<<spaces[4]<<"  |  "<<spaces[5]<<"  \n";
+  cout<<"_____|_____|_____\n";
+  cout<<"     |     |     \n";
+  cout<<"  "<<spaces[6]<<"  |  "<<spaces[7]<<"  |  "<<spaces[8]<<"  \n";
+  cout<<"     |     |     \n";
+  cout<<'\n';
+}
+void playerMove(char *spaces, char player){
+   
+  do{
+  cout<<"Enter your move in range (1-9)\n";
+  cin>>playNum;
+  playNum--;
+  if (spaces[playNum] == ' ')
+  {
+    spaces[playNum] = player;
+    break;
+  }
+ } while (!playNum > 0 && !playNum < 8);
+ 
+}
+void computerMove(char *spaces, char computer){
+  int num;
+  srand(time(0));
+  num = rand() % 9;
+
+ do{
+  if (spaces[num] == ' ' && spaces[num] != playNum)
+  {
+    spaces[num] = computer;
+    break;
+  }
+ } while (!num > 0 && !num < 8);
+
+}
+bool checkWinner(char *spaces, char player, char computer){
+  
+  if (spaces[0] != ' ' && (spaces[0] == spaces[1] && spaces[1] == spaces[2]))
+  spaces[0] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else if (spaces[3] != ' ' && (spaces[3] == spaces[4] && spaces[4] == spaces[5]))
+  spaces[3] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else if (spaces[6] != ' ' && (spaces[6] == spaces[7] && spaces[7] == spaces[8]))
+  spaces[6] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else if (spaces[0] != ' ' && (spaces[0] == spaces[3] && spaces[3] == spaces[6]))
+  spaces[0] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else if (spaces[1] != ' ' && (spaces[1] == spaces[4] && spaces[4] == spaces[7]))
+  spaces[1] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else if (spaces[2] != ' ' && (spaces[2] == spaces[5] && spaces[5] == spaces[8]))
+  spaces[2] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else if (spaces[0] != ' ' && (spaces[0] == spaces[4] && spaces[4] == spaces[8]))
+  spaces[0] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else if (spaces[2] != ' ' && (spaces[2] == spaces[4] && spaces[4] == spaces[6]))
+  spaces[2] == player ? cout<<"YOU WIN!\n" : cout<<"YOU LOST!\n";
+  else  return false;
+  return true;
+}
+bool checkTie(char *spaces){
+  for (int i = 0; i < 9; i++)
+  {
+    if (spaces[i] == ' ')
+    {
+      return false;
+    }
+  } 
+  cout<<"It's a TIE\n";
+  return true;
+}
