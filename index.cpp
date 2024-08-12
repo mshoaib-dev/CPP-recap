@@ -12,18 +12,28 @@ accepting a user input.
 
 int main()
 {
-  //initializing a pointer
-  int *pNum = NULL;
-  pNum = new int; // new keyword followed by data type
-  *pNum = 423;
+//dynamic memory: a pointer pointing to an array
+  char *pGrades = NULL;
+  int size;
+  cout<<"Enter no. of grades: ";
+  cin>>size;
 
-  cout<<"Address: "<<pNum<<'\n';
-  cout<<"Value: "<<*pNum<<'\n';
+  pGrades = new char[size]; // allocating a dynamic heap memory allocation to a pointer pointing to an array of characters
 
-  delete pNum; // deleting heap pointer
-  
-  cout<<"Updated Address: "<<pNum<<'\n';
-  cout<<"Updated Value: "<<*pNum<<'\n';
-  
+//taking input
+  for (int i = 0; i < size; i++)
+  {
+    cout<<"Enter the grade #"<<i+1<<": ";
+    cin>>pGrades[i];
+  }
+
+//printing the result
+  for (int i = 0; i < size; i++)
+  {
+  cout<<pGrades[i]<<" ";
+  }
+
+//resetting pointer memory
+  delete[] pGrades;
   return 0;
 };
