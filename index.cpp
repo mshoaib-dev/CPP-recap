@@ -2,38 +2,36 @@
 using namespace std;
 
 /*
-DYNAMIC MEMORY = Memory that is allocated after the program is already complied and running.
-- Use the 'new' operator to allocate memory in the heap rather than the stack.
-- Useful when don't know how much memory we'll need. Make the program more flexible especially when 
-accepting a user input.
-- It's a good practive to delete the dynamic memory literal to reset the memory.
-- 'delete' operator is used alongwith 'new' operator. 
-*/  
+RECURSION = a programming technique where a function invokes itself from within (nested function call)
+- break a complex concept into a repeatable single steps
+- usually use if statement for condition validation and then nested function call
+-(iterative vs recursive)
+- ADV. = less code and is cleaner, useful for sorting and searching algorithms
+- DIS. = uses more memory and slower
+- Invokig a function add a frame to a stack, when stack is overloaded, it leads to STACK OVERFLOW
+*/
 
+int factorial(int n);
 int main()
 {
-//dynamic memory: a pointer pointing to an array
-  char *pGrades = NULL;
-  int size;
-  cout<<"Enter no. of grades: ";
-  cin>>size;
-
-  pGrades = new char[size]; // allocating a dynamic heap memory allocation to a pointer pointing to an array of characters
-
-//taking input
-  for (int i = 0; i < size; i++)
-  {
-    cout<<"Enter the grade #"<<i+1<<": ";
-    cin>>pGrades[i];
-  }
-
-//printing the result
-  for (int i = 0; i < size; i++)
-  {
-  cout<<pGrades[i]<<" ";
-  }
-
-//resetting pointer memory
-  delete[] pGrades;
+  int n;
+  cout<<"Enter a # to find factorial: ";
+  cin>>n;
+  cout<<"Factorial = "<<factorial(n);
   return 0;
 };
+// iterative approach
+int factorial(int n){
+  int fact = 1;
+  for (n; n > 0; n--)
+  {
+    fact*=n;
+  }
+  return fact;
+}
+
+//recursive approach
+int factorial(int n){
+  if (n > 1)  return n * factorial(n-1); // invoking a function from within 
+  else return 1;
+}
