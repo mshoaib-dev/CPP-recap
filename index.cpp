@@ -1,51 +1,88 @@
 #include <iostream>
 using namespace std;
-#define PI 3.14159265359
 
 /*
-INHERITANCE  = A class can retrieve attributes and methods from another class 
-- Children classes (Derived Class) inherit from a Parent class (Base Class)
-- Helps to reuse similar code found within multiple classes
-- For multiple classes having shared properties/methods > place them in a Parent class, for code reusability.
+Constructor Explained
+1. Non-parameterized
+2. Parameterized
+3. Copy (copy the properties of one object to another.)
+- Getter & Setter
+- Encapsulation : binding the data and function in a single unit called class
 */
 
-//base class
-class Shape{
-  public:
-  double area; 
-  double volume;
-};
+class Car
+{
+private:
+  double carShares;
 
-//derived class = Cube
-class Cube : public Shape{
-  public: int side;
-  Cube(int side){
-    this->side = side;
-    this->area  = 6 * (side * side);
-    this->volume  = side * side * side;
-  }    
-};
+public:
+// properties/attributes/data
+  string make;
+  string model;
+  int year;
+  string color;
 
-//derived class = Sphere
-class Sphere : public Shape{
-  public: int radius;
-  Sphere(int side){
-    this->radius = side;
-    this->area  = 4 * PI * (radius * radius);
-    this->volume  = 4/3.0 * PI *(radius * radius * radius);
-  }    
+//1. Non-paremeterized Constructor
+  Car(){
+    cout<<"This is default constructor.\n";
+  }; 
+
+//2. Parameterized Constructor
+  Car(string make, string m, int y, string color)
+  {
+    this->make = make;
+    this->model = m;
+    this->year = y;
+    this->color = color;
+  }
+
+//3. Copy Constructor
+  Car(Car &origObj){
+    cout<<"This is copy constructor\n";
+    this->make = "Toyota";
+    this->model = origObj.model;
+    this->year = 2024;
+    this->color = origObj.year;
+  }
+
+  void set(double carShares){   //setter
+    this->carShares = carShares;
+  }
+
+  double get(){   //getter
+    return carShares;
+  }
+
+//methods/member function (actions by Car)
+  void accelarator(){
+    cout<<"It accelarates\n";
+  }
+
+  void ignition(){
+    cout<<"Self ignition\n";
+  }
+
 };
 
 int main()
 {
-// creating instance of Class
-Cube cube(10);  
-Sphere sphere(10);
+//creating instances of class = OBJECT
+Car car0;
+Car car1("Honda", "Civic", 2023, "Grey");
 
-cout<<"Cube Area: "<<cube.area<<"cm^2\n";
-cout<<"Cube Volume: "<<cube.volume<<"cm^3\n";
-cout<<"Sphere Area: "<<sphere.area<<"cm^2\n";
-cout<<"Sphere Volume: "<<sphere.volume<<"cm^3\n";
+cout<<car1.make<<", ";
+cout<<car1.model<<", ";
+cout<<car1.year<<", ";
+cout<<car1.color<<'\n';
+
+Car car2(car1); // default(if not created explicitly)/custom copy-constructor
+cout<<car2.make<<'\n';
+car2.set(999999);
+cout<<"Car Shares = B$"<<car2.get()<<"\n";
+
+//invoking methods (actions)
+car1.accelarator();
+car1.ignition();
 
   return 0;
 };
