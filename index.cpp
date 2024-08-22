@@ -1,48 +1,51 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
-//Destructor, Shallow and Deep Copy Constructor
+//INHERITANCE
 
-class Student{
+class Person{ //Base class
 public:
   string name; 
-  int *rollNoPtr;
+  int age;
 
-  Student(string name, int rollNo){
+// custom-constructor
+  Person(string name, int age){
     this->name = name;
-    rollNoPtr = new int;  // allocated new memory at runtime in a HEAP for DAM
-    *rollNoPtr = rollNo;
+    this->age = age;
   }
 
-// custom copy constructor (it is required for making DEEP copy-constructor to implement DAM)
-  Student(Student &origObj){
-    this->name = origObj.name;
-    rollNoPtr = new int;
-    *rollNoPtr = *origObj.rollNoPtr;
+//base-destructor
+  ~Person(){
+    cout<<"Parent destructor\n";
+  }
+  
+};
+
+class Student : public Person{ //Derived Class
+public:
+  int rollNo;
+
+//derived class constructor
+  Student(string name, int age, int rollNo) : Person(name, age){
+    this->rollNo = rollNo;
   }
 
-//destructor
+//child-destructor
   ~Student(){
-    cout<<"destructor is called\n";
-    delete rollNoPtr; // delete the memory allocated to pointer in the Heap not the Pointer.
+    cout<<"Child destructor\n";
   }
 
+//result
   void getInfo(){
     cout<<"Name: "<<name<<endl;
-    cout<<"Roll No: "<<*rollNoPtr<<endl;
+    cout<<"Age: "<<age<<endl;
+    cout<<"RollNo: "<<rollNo<<endl;
   }
 };
 
 int main()
 {
-  Student student1("M.Shoaib", 123);
+  Student student1("M.Shoaib", 20,123);
   student1.getInfo();
-  Student student2(student1); // default copy-constructor
-  *(student2.rollNoPtr) = 321; // updating the value of rollno for student2, but due to shallow copy, it's reflecting in student1 too. Even with default/custom copy-constructor.
-  student2.name = "M. Usama";
-  student2.getInfo();
-  student1.getInfo();
-
   return 0;
 };
