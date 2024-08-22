@@ -1,88 +1,40 @@
 #include <iostream>
+// #include <string>
 using namespace std;
 
-/*
-Constructor Explained
-1. Non-parameterized
-2. Parameterized
-3. Copy (copy the properties of one object to another.)
-- Getter & Setter
-- Encapsulation : binding the data and function in a single unit called class
-*/
+//Shallow and Deep Copy Constructor
 
-class Car
-{
-private:
-  double carShares;
-
+class Student{
 public:
-// properties/attributes/data
-  string make;
-  string model;
-  int year;
-  string color;
+  string name; 
+  int *rollNoPtr;
 
-//1. Non-paremeterized Constructor
-  Car(){
-    cout<<"This is default constructor.\n";
-  }; 
-
-//2. Parameterized Constructor
-  Car(string make, string m, int y, string color)
-  {
-    this->make = make;
-    this->model = m;
-    this->year = y;
-    this->color = color;
+  Student(string name, int rollNo){
+    this->name = name;
+    rollNoPtr = new int;  // allocated new memory at runtime in a HEAP for DAM
+    *rollNoPtr = rollNo;
   }
 
-//3. Copy Constructor
-  Car(Car &origObj){
-    cout<<"This is copy constructor\n";
-    this->make = "Toyota";
-    this->model = origObj.model;
-    this->year = 2024;
-    this->color = origObj.year;
-  }
+//custom copy constructor
+  // Student(Student &origObj){
+  //   this->name = origObj.name;
+  //   this->rollNoPtr = origObj.rollNoPtr;
+  // }
 
-  void set(double carShares){   //setter
-    this->carShares = carShares;
+  void getInfo(){
+    cout<<"Name: "<<name<<endl;
+    cout<<"Roll No: "<<*rollNoPtr<<endl;
   }
-
-  double get(){   //getter
-    return carShares;
-  }
-
-//methods/member function (actions by Car)
-  void accelarator(){
-    cout<<"It accelarates\n";
-  }
-
-  void ignition(){
-    cout<<"Self ignition\n";
-  }
-
 };
 
 int main()
 {
-//creating instances of class = OBJECT
-Car car0;
-Car car1("Honda", "Civic", 2023, "Grey");
-
-cout<<car1.make<<", ";
-cout<<car1.model<<", ";
-cout<<car1.year<<", ";
-cout<<car1.color<<'\n';
-
-Car car2(car1); // default(if not created explicitly)/custom copy-constructor
-cout<<car2.make<<'\n';
-car2.set(999999);
-cout<<"Car Shares = B$"<<car2.get()<<"\n";
-
-//invoking methods (actions)
-car1.accelarator();
-car1.ignition();
+  Student student1("M.Shoaib", 123);
+  student1.getInfo();
+  Student student2(student1); // default copy-constructor
+  *(student2.rollNoPtr) = 321; // updating the value of rollno for student2, but due to shallow copy, it's reflecting in student1 too. Even with default/custom copy-constructor.
+  student2.getInfo();
+  student1.getInfo();
 
   return 0;
 };
