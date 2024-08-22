@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-//Shallow and Deep Copy Constructor
+//Destructor, Shallow and Deep Copy Constructor
 
 class Student{
 public:
@@ -20,6 +20,12 @@ public:
     this->name = origObj.name;
     rollNoPtr = new int;
     *rollNoPtr = *origObj.rollNoPtr;
+  }
+
+//destructor
+  ~Student(){
+    cout<<"destructor is called\n";
+    delete rollNoPtr; // delete the memory allocated to pointer in the Heap not the Pointer.
   }
 
   void getInfo(){
