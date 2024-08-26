@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-//INHERITANCE (Multi Level Type)
+//INHERITANCE (Multiple Type)
 
-class Person{ //Base class
+class Person{  // class-1
 public:
   string name; 
   int age;
@@ -16,18 +16,18 @@ public:
 
 };
 
-class Student : public Person{ //Inherited from Person Class
+class Student{ // class-2
 public: int rollNo;
 
 //derived class constructor
-  Student(string name, int age, int rollNo) : Person(name, age){
+  Student(int rollNo){
     this->rollNo = rollNo;
   }
 };
 
-class GraduateStudent : public Student{ // Inherited from Student Class
+class GraduateStudent : public Person, public Student{ // this class inherited from class-1 & class-2 
 public: bool graduate; 
-  GraduateStudent(string name, int age, int rollNo, bool graduate) : Student(name, age,rollNo){
+  GraduateStudent(string name, int age, int rollNo, bool graduate) : Person(name, age), Student(rollNo){
     this->graduate = graduate;
   };
 
