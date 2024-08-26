@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//INHERITANCE
+//INHERITANCE (Single Level Type)
 
 class Person{ //Base class
 public:
