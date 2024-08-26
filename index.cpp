@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//INHERITANCE (Single Level Type)
+//INHERITANCE (Multi Level Type)
 
 class Person{ //Base class
 public:
@@ -14,38 +14,35 @@ public:
     this->age = age;
   }
 
-//base-destructor
-  ~Person(){
-    cout<<"Parent destructor\n";
-  }
-  
 };
 
-class Student : public Person{ //Derived Class
-public:
-  int rollNo;
+class Student : public Person{ //Inherited from Person Class
+public: int rollNo;
 
 //derived class constructor
   Student(string name, int age, int rollNo) : Person(name, age){
     this->rollNo = rollNo;
   }
+};
 
-//child-destructor
-  ~Student(){
-    cout<<"Child destructor\n";
-  }
+class GraduateStudent : public Student{ // Inherited from Student Class
+public: bool graduate; 
+  GraduateStudent(string name, int age, int rollNo, bool graduate) : Student(name, age,rollNo){
+    this->graduate = graduate;
+  };
 
-//result
+//getting the result  
   void getInfo(){
-    cout<<"Name: "<<name<<endl;
-    cout<<"Age: "<<age<<endl;
-    cout<<"RollNo: "<<rollNo<<endl;
-  }
+  cout<<"Name: "<<name<<endl;
+  cout<<"Age: "<<age<<endl;
+  cout<<"RollNo: "<<rollNo<<endl;
+  cout<<"Graduate: "<<graduate<<endl;
+}
 };
 
 int main()
 {
-  Student student1("M.Shoaib", 20,123);
-  student1.getInfo();
+  GraduateStudent gradStudent1("M.Shoaib", 20, 123, true);
+  gradStudent1.getInfo();
   return 0;
 };
