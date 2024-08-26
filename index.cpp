@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-//INHERITANCE (Multiple Type)
+//INHERITANCE (Hierarchical Type)
 
-class Person{  // class-1
+class Person{  //Base Class
 public:
   string name; 
   int age;
@@ -16,18 +16,24 @@ public:
 
 };
 
-class Student{ // class-2
+class Student : public Person{ // Derived - 1 from Base Class
 public: int rollNo;
 
 //derived class constructor
-  Student(int rollNo){
+  Student(string name, int age, int rollNo) : Person(name, age){
     this->rollNo = rollNo;
   }
-};
 
-class GraduateStudent : public Person, public Student{ // this class inherited from class-1 & class-2 
+//result
+  void getInfo(){
+  cout<<"Name: "<<name<<endl;
+  cout<<"Age: "<<age<<endl;
+  cout<<"RollNo: "<<rollNo<<endl;
+};
+};
+class GraduateStudent : public Person{ // Derived - 2 from Base Class 
 public: bool graduate; 
-  GraduateStudent(string name, int age, int rollNo, bool graduate) : Person(name, age), Student(rollNo){
+  GraduateStudent(string name, int age, bool graduate) : Person(name, age){
     this->graduate = graduate;
   };
 
@@ -35,14 +41,15 @@ public: bool graduate;
   void getInfo(){
   cout<<"Name: "<<name<<endl;
   cout<<"Age: "<<age<<endl;
-  cout<<"RollNo: "<<rollNo<<endl;
   cout<<"Graduate: "<<graduate<<endl;
 }
 };
 
 int main()
 {
-  GraduateStudent gradStudent1("M.Shoaib", 20, 123, true);
+  GraduateStudent gradStudent1("M.Shoaib", 20, true);
   gradStudent1.getInfo();
+  Student student1("M.Shoaib", 20, 123);
+  student1.getInfo();
   return 0;
 };
