@@ -1,20 +1,25 @@
 #include <iostream>
 using namespace std;
 
-//static keyword
+//static object
 
-void fun(){
-  // int a=0;
-  static int a=0; // run 1 time on each funI() call.
-  cout<<"a: "<<a<<endl;
-  a++;
-  cout<<"a: "<<a<<endl;
+class AUTO{
+public:
+  AUTO(){
+    cout<<"constructor\n";
+  }
+  ~AUTO(){
+  cout<<"destructor\n";
+  }
 };
 
 int main()
 {
-  fun();
-  fun();
-  fun();
+  if(true){
+    // AUTO a; 
+    static AUTO a;
+  };
+  
+  cout<<"End of main function\n";
   return 0;
 };
