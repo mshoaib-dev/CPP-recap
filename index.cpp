@@ -12,6 +12,7 @@ public:
   Student(){
     cout<<"Non-parameterized constructor\n";
   };
+  
 //parameterized constructor
   Student(string name){
     this->name = name;
